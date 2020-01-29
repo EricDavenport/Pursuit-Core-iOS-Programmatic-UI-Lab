@@ -11,8 +11,8 @@ import UIKit
 
 class ColorGuessingModel {
     
-    private var currentColor: UIColor
-    private var currentDominantRGBColor: UIColor
+    public var currentColor: UIColor
+    public var currentDominantRGBColor: UIColor
         
     func getNewColor() -> UIColor {
         let randomColorTuple = ColorGuessingModel.randColor()
@@ -38,6 +38,7 @@ class ColorGuessingModel {
             dominantColor = UIColor.green
         } else {
             dominantColor = UIColor.blue
+            
         }
         return (color, dominantColor)
         

@@ -10,9 +10,7 @@ import UIKit
 
 class GameView: UIView {
   
-  //private let colorModel = ColorGuessingModel().getNewColor()
-  
-  
+  //public var newColor = ColorGuessingModel().getNewColor()
   
   public lazy var colorSquare: UIView = {
     let view = UIView()
@@ -26,6 +24,7 @@ class GameView: UIView {
     button.setTitleColor(.white, for: .normal)
     button.backgroundColor = .blue
     button.translatesAutoresizingMaskIntoConstraints = false
+    
     return button
   }()
   
@@ -35,6 +34,7 @@ class GameView: UIView {
     button.setTitleColor(.white, for: .normal)
     button.backgroundColor = .red
     button.translatesAutoresizingMaskIntoConstraints = false
+ 
     return button
   }()
   
@@ -44,13 +44,12 @@ class GameView: UIView {
     button.setTitleColor(.white, for: .normal)
     button.backgroundColor = .green
     button.translatesAutoresizingMaskIntoConstraints = false
+    
     return button
   }()
   
   public lazy var stackView: UIStackView = {
     let stackView = UIStackView()
-    stackView.backgroundColor = .black
-    stackView.layer.borderWidth = 10
     return stackView
   }()
   
@@ -68,6 +67,10 @@ class GameView: UIView {
     setupDisplay()
   }
   
+  public func changeViewColor() {
+    colorSquare.backgroundColor = ColorGuessingModel().getNewColor()
+  }
+  
   private func setupDisplay() {
     addSubview(colorSquare)
     
@@ -75,9 +78,7 @@ class GameView: UIView {
     
     NSLayoutConstraint.activate([
       colorSquare.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-      colorSquare.centerXAnchor.constraint(equalTo: centerXAnchor),
-     // colorSquare.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-     // colorSquare.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+      colorSquare.centerXAnchor.constraint(equalTo: centerXAnchor)
     ])
     
     colorSquare.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.75).isActive = true
@@ -96,6 +97,7 @@ class GameView: UIView {
     stackView.distribution = .equalSpacing
     stackView.alignment = .center
     stackView.spacing = 20
+    
     
     stackView.translatesAutoresizingMaskIntoConstraints = false
     
