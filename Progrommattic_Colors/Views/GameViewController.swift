@@ -12,6 +12,9 @@ class GameViewController: UIViewController {
   
   private let gameView = GameView()
   
+  var scoreString : String = "Score: "
+  var score = 0
+  
   override func loadView() {
     view = gameView
   }
@@ -43,6 +46,9 @@ class GameViewController: UIViewController {
     if ColorGuessingModel().isDominant(guess: sender.backgroundColor!){
     print("correct")
       print(sender.backgroundColor)
+      score += 1
+      scoreString = "Score: \(score)"
+      gameView.scoreLabel.text = scoreString
     } else {
       print("incorrect")
       print(sender.backgroundColor)

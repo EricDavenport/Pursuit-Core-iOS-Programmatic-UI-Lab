@@ -15,7 +15,6 @@ class GameView: UIView {
 //    scoreString = "Score: \(score)"
 //    }
 //  }
-  private var scoreString = "Score: "
   
   public lazy var colorSquare: UIView = {
     let view = UIView()
@@ -56,7 +55,7 @@ class GameView: UIView {
   public lazy var scoreLabel : UILabel = {
     let label = UILabel()
     label.backgroundColor = .orange
-    label.text = scoreString
+    label.text = ""
     return label
   }()
   
@@ -83,20 +82,7 @@ class GameView: UIView {
   public func changeViewColor() {
     colorSquare.backgroundColor = ColorGuessingModel().getNewColor()
   }
-  
-  private func setUpScoreLabel() {
-    addSubview(scoreLabel)
-    
-    scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-    scoreLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 60),
-    scoreLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10),
-    scoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-    scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-    scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10)
-    ])
-  }
+
   
   private func setupDisplay() {
     addSubview(colorSquare)
@@ -121,23 +107,31 @@ class GameView: UIView {
     addSubview(stackView)
     
     stackView.axis = .horizontal
-    stackView.distribution = .equalSpacing
+    stackView.distribution = .fillEqually
     stackView.alignment = .center
-    stackView.spacing = 20
-    
+    stackView.spacing = 10
+
     stackView.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: topAnchor, constant: 75),
+      stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 75),
       stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10),
       stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35),
       stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35)
     ])
-    
   }
   
-
-  
-  
+  private func setUpScoreLabel() {
+    addSubview(scoreLabel)
+    
+    scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+    scoreLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
+    scoreLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -100),
+    scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+    scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+    ])
+  }
   
 }
