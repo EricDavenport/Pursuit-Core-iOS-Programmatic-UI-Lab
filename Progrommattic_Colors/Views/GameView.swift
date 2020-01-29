@@ -9,8 +9,13 @@
 import UIKit
 
 class GameView: UIView {
-  
-  //public var newColor = ColorGuessingModel().getNewColor()
+//
+//  private var score: Int {
+//    didSet {
+//    scoreString = "Score: \(score)"
+//    }
+//  }
+  private var scoreString = "Score: "
   
   public lazy var colorSquare: UIView = {
     let view = UIView()
@@ -24,7 +29,7 @@ class GameView: UIView {
     button.setTitleColor(.white, for: .normal)
     button.backgroundColor = .blue
     button.translatesAutoresizingMaskIntoConstraints = false
-    
+    button.tag = 0
     return button
   }()
   
@@ -34,7 +39,7 @@ class GameView: UIView {
     button.setTitleColor(.white, for: .normal)
     button.backgroundColor = .red
     button.translatesAutoresizingMaskIntoConstraints = false
- 
+    button.tag = 1
     return button
   }()
   
@@ -44,8 +49,15 @@ class GameView: UIView {
     button.setTitleColor(.white, for: .normal)
     button.backgroundColor = .green
     button.translatesAutoresizingMaskIntoConstraints = false
-    
+    button.tag = 2
     return button
+  }()
+  
+  public lazy var scoreLabel : UILabel = {
+    let label = UILabel()
+    label.backgroundColor = .orange
+    label.text = scoreString
+    return label
   }()
   
   public lazy var stackView: UIStackView = {
@@ -65,10 +77,25 @@ class GameView: UIView {
   private func commonInit() {
     setupStack()
     setupDisplay()
+    setUpScoreLabel()
   }
   
   public func changeViewColor() {
     colorSquare.backgroundColor = ColorGuessingModel().getNewColor()
+  }
+  
+  private func setUpScoreLabel() {
+    addSubview(scoreLabel)
+    
+    scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+    scoreLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 60),
+    scoreLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10),
+    scoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+    scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+    scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10)
+    ])
   }
   
   private func setupDisplay() {
@@ -97,7 +124,6 @@ class GameView: UIView {
     stackView.distribution = .equalSpacing
     stackView.alignment = .center
     stackView.spacing = 20
-    
     
     stackView.translatesAutoresizingMaskIntoConstraints = false
     

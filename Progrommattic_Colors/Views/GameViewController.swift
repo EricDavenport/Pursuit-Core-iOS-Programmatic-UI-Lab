@@ -34,9 +34,11 @@ class GameViewController: UIViewController {
   }
   
   @objc private func changeColor(_ sender: UIButton) {
-    gameView.changeViewColor()
+    
     answerSelector(sender)
+    gameView.changeViewColor()
   }
+  
   func answerSelector(_ sender: UIButton) {
     if ColorGuessingModel().isDominant(guess: sender.backgroundColor!){
     print("correct")
@@ -46,32 +48,51 @@ class GameViewController: UIViewController {
       print(sender.backgroundColor)
 
     }
+    
   }
 
 //    switch sender.tag {
-//    case 1:
-//      if ColorGuessingModel().isDominant(guess: UIColor.blue) == true {
+//    case 0:
+//      print("blue pressed")
+//      if ColorGuessingModel().isDominant(guess: sender.backgroundColor!) == true {
 //        print("correct")
+//        print(sender.backgroundColor)
+//
 //      } else {
 //        print("incorrect")
+//        print(sender.backgroundColor)
+//
+//      }
+//    case 1:
+//      print("red pressed")
+//      if ColorGuessingModel().isDominant(guess: sender.backgroundColor!) == true {
+//        print("correct")
+//        print(sender.backgroundColor)
+//
+//      } else {
+//        print("incorrect")
+//        print(sender.backgroundColor)
+//
 //      }
 //    case 2:
-//      if ColorGuessingModel().isDominant(guess: UIColor.red) == true {
+//      print("green pressed")
+//      print(sender.backgroundColor)
+//      if ColorGuessingModel().isDominant(guess: sender.backgroundColor!) == true {
 //        print("correct")
+//
+//
 //      } else {
 //        print("incorrect")
-//      }
-//    case 3:
-//      if ColorGuessingModel().isDominant(guess: UIColor.green) == true {
-//        print("correct")
-//      } else {
-//        print("incorrect")
+//        print(sender.backgroundColor)
+//
 //      }
 //    default:
 //      print("no color selected")
 //
 //    }
-//  }
-//
+   // gameView.changeViewColor()
+  }
+
+
   
-}
+
