@@ -22,6 +22,14 @@ class GameView: UIView {
     return view
   }()
   
+  public lazy var titleLabel : UILabel = {
+    let label = UILabel()
+    label.backgroundColor = .brown
+    label.textAlignment = .center
+    label.text = "Colors 2" 
+    return label
+  }()
+  
   public lazy var blueButton : UIButton = {
     let button = UIButton()
     button.setTitle("Blue", for: .normal)
@@ -55,7 +63,8 @@ class GameView: UIView {
   public lazy var scoreLabel : UILabel = {
     let label = UILabel()
     label.backgroundColor = .orange
-    label.text = ""
+    label.textAlignment = .right
+    label.text = "Score: "
     return label
   }()
   
@@ -77,12 +86,25 @@ class GameView: UIView {
     setupStack()
     setupDisplay()
     setUpScoreLabel()
+    titleSetup()
   }
   
   public func changeViewColor() {
     colorSquare.backgroundColor = ColorGuessingModel().getNewColor()
   }
 
+  private func titleSetup() {
+    addSubview(titleLabel)
+    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+      titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+      titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+     // titleLabel.bottomAnchor.constraint(equalTo: colorSquare.topAnchor, constant: 30)
+    
+    ])
+  }
   
   private func setupDisplay() {
     addSubview(colorSquare)
@@ -90,7 +112,7 @@ class GameView: UIView {
     colorSquare.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
-      colorSquare.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+      colorSquare.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
       colorSquare.centerXAnchor.constraint(equalTo: centerXAnchor)
     ])
     
@@ -115,7 +137,7 @@ class GameView: UIView {
     
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 75),
-      stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10),
+      stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100),
       stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35),
       stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35)
     ])
@@ -128,10 +150,12 @@ class GameView: UIView {
     
     NSLayoutConstraint.activate([
     scoreLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
-    scoreLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -100),
+    scoreLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
     scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
     scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
     ])
+    
+    
   }
   
 }
